@@ -1,0 +1,116 @@
+@import "base";
+@import "tools";
+@import "playlist";
+@import "player";
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+div.page {
+  @include outer-container(100%);
+  height: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+
+section {
+  @include media(min-width 768px, 12) {
+    @include span-columns(6);
+    @include shift(3); 
+  }
+  @include media(max-width 767px, 12) {
+    @include span-columns(10);
+    @include shift(1);
+  }
+}
+
+.white-block {
+  background-color: rgba(255,255,255,0.6);
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.1);
+  //border: 1px solid rgba(0,0,0,0.05);
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: (0, 0, 0, 0.3);
+}
+
+.logo {
+  color: $base-black;
+  font-family: "PT Sans", Helvetica, sans-serif;
+  font-size: 5em;
+  font-weight: bold;
+  padding-bottom: 10px;
+  user-select: none;
+  cursor: default;
+
+  &.small {
+    font-size: 2em;
+    padding-bottom: 0;
+  }
+
+}
+
+header.app-header {
+  @extend .white-block;
+
+  width: 100%;
+  height: 50px;
+  text-align: center;
+
+  .logo, .made-by {
+    line-height: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .logo {
+    @include span-columns(4);
+    @include shift(4);
+  }
+
+  .made-by {
+    @include span-columns(2);
+    @include shift(2);
+    user-select: none;
+    cursor: default;
+    a {
+      cursor: pointer;
+    }
+  }
+}
+
+.page-flex {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  &.auth-page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .auth-panel {
+      text-align: center;
+      .auth-text {
+        font-weight: normal;
+        padding-bottom: 5px;
+      }
+
+      .auth-button {
+
+      }
+    }
+  }
+
+  &.app-page {
+    flex-direction: column;
+  }
+}

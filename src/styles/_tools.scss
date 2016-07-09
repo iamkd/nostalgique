@@ -1,0 +1,65 @@
+$base-height: 28px;
+
+.tools-container {
+  margin-top: 25px;
+
+  flex: 0 0 auto;
+
+  .tools {
+    @extend .white-block;
+
+    padding: 25px 20px;
+
+    .date {
+      text-align: center;
+      font-family: Helvetica, sans-serif;
+      font-size: 2em;
+      font-weight: 300;
+      margin-bottom: 5px;
+    }
+
+    .slider {
+      width: 100%;
+      height: $base-height;
+      position: relative;
+      margin: 0 auto;
+      .slider-body {
+        position: relative;
+        top: $base-height * 3 / 8;
+        height: $base-height / 4;
+        border-radius: 100px;
+        width: 100%;
+        border: 1px solid $base-gray;
+      }
+
+      .slider-body-filled {
+        position: absolute;
+        top: $base-height * 3 / 8;
+        height: $base-height / 4;
+        border-radius: 100px;
+        left: 0;
+        right: 50px;
+        border: 1px solid $base-gray;
+        background: lighten($base-gray, 10%);
+      }
+
+      .slider-handle {
+        position: absolute;
+        top: 0;
+        right: 50px;
+        width: $base-height;
+        height: $base-height;
+        border-radius: 100px;
+        border: 1px solid shade($base-gray, 5%);
+        box-shadow: 0 1px 1px 1px rgba(0,0,0,0.08);
+        background: white;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.player-slider {
+  $base-height: 10px;
+  @extend .slider;
+}

@@ -1,0 +1,20 @@
+@import "normalize";
+@include normalize();
+
+@import "bootstrap-btn";
+
+@import "bourbon/bourbon";
+@import "neat/neat";
+
+$base-black: #333;
+$base-gray: #ccc;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 14px;
+  color: $base-black;
+}
