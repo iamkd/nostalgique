@@ -945,7 +945,7 @@ body {
         text-align: center; }
         .player-container .player .player-buttons .player-button:last-child {
           margin-right: 0; }
-        .player-container .player .player-buttons .player-button .fa.inactive {
+        .player-container .player .player-buttons .player-button.inactive {
           color: #999999; }
         .player-container .player .player-buttons .player-button .fa-play {
           padding-left: 3px; }

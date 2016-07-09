@@ -23009,9 +23009,10 @@
 	      var _props = this.props;
 	      var dispatch = _props.dispatch;
 	      var currentTrack = _props.currentTrack;
+	      var audios = _props.audios;
 
 	      if (track != currentTrack) {
-	        dispatch((0, _player.playerLoadTrack)(track));
+	        dispatch((0, _player.playerLoadTrack)(audios.indexOf(track)));
 	      }
 	    }
 	  }, {
@@ -23042,7 +23043,7 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  return { isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: state.player.currentTrack };
+	  return { isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: state.player.currentTrackId == -1 ? null : state.audios.items[state.player.currentTrackId] };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Playlist);
@@ -23186,11 +23187,13 @@
 	  value: true
 	});
 	exports.playerLoadTrack = playerLoadTrack;
+	exports.playerNextTrack = playerNextTrack;
+	exports.playerPrevTrack = playerPrevTrack;
 	exports.playerSetPlayState = playerSetPlayState;
-	function playerLoadTrack(track) {
+	function playerLoadTrack(trackId) {
 	  return {
 	    type: 'PLAYER_LOAD_TRACK',
-	    track: track
+	    trackId: trackId
 	  };
 	}
 
@@ -23286,6 +23289,11 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Player).call(this, props));
 
 	    _this.displayName = 'Player';
+
+	    _this.state = {
+	      nextAvailable: true,
+	      prevAvailable: true
+	    };
 	    return _this;
 	  }
 
@@ -23294,16 +23302,44 @@
 	    value: function componentDidUpdate(prevProps) {
 	      var _props = this.props;
 	      var currentTrack = _props.currentTrack;
+	      var currentTrackId = _props.currentTrackId;
+	      var playlistLength = _props.playlistLength;
 	      var dispatch = _props.dispatch;
 
 	      var prevTrack = prevProps.currentTrack;
+	      var prevTrackId = prevProps.currentTrackId;
+	      var wasPlaying = prevProps.isPlaying;
 
 	      if (currentTrack != null) {
 	        if (currentTrack != prevTrack) {
 	          dispatch((0, _player.playerSetPlayState)('pause'));
 	          player.pause();
 	          player = new Audio(currentTrack.url);
+
+	          if (prevTrackId == -1 && currentTrackId == 0 || wasPlaying) {
+	            dispatch((0, _player.playerSetPlayState)('play'));
+	            player.play();
+	          }
 	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(newProps) {
+	      var currentTrackId = newProps.currentTrackId;
+	      var playlistLength = newProps.playlistLength;
+
+	      if (currentTrackId + 1 == playlistLength || currentTrackId == -1) {
+	        console.log();
+	        this.setState({ nextAvailable: false });
+	      } else {
+	        this.setState({ nextAvailable: true });
+	      }
+
+	      if (currentTrackId <= 0) {
+	        this.setState({ prevAvailable: false });
+	      } else {
+	        this.setState({ prevAvailable: true });
 	      }
 	    }
 	  }, {
@@ -23311,10 +23347,10 @@
 	    value: function playClicked() {
 	      var _props2 = this.props;
 	      var dispatch = _props2.dispatch;
-	      var currentTrack = _props2.currentTrack;
+	      var currentTrackId = _props2.currentTrackId;
 
-	      if (currentTrack == null) {
-	        return;
+	      if (currentTrackId == -1) {
+	        dispatch((0, _player.playerLoadTrack)(0));
 	      }
 
 	      if (player.paused) {
@@ -23326,11 +23362,39 @@
 	      }
 	    }
 	  }, {
+	    key: 'prevClicked',
+	    value: function prevClicked() {
+	      if (this.state.prevAvailable) {
+	        var _props3 = this.props;
+	        var currentTrackId = _props3.currentTrackId;
+	        var playlistLength = _props3.playlistLength;
+	        var dispatch = _props3.dispatch;
+
+	        if (currentTrackId > 0) {
+	          dispatch((0, _player.playerLoadTrack)(currentTrackId - 1));
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'nextClicked',
+	    value: function nextClicked() {
+	      if (this.state.nextAvailable) {
+	        var _props4 = this.props;
+	        var currentTrackId = _props4.currentTrackId;
+	        var playlistLength = _props4.playlistLength;
+	        var dispatch = _props4.dispatch;
+
+	        if (currentTrackId < playlistLength - 1) {
+	          dispatch((0, _player.playerLoadTrack)(currentTrackId + 1));
+	        }
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props3 = this.props;
-	      var isPlaying = _props3.isPlaying;
-	      var volume = _props3.volume;
+	      var _props5 = this.props;
+	      var isPlaying = _props5.isPlaying;
+	      var volume = _props5.volume;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -23340,7 +23404,7 @@
 	          { className: 'player-buttons' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'player-button' },
+	            { className: "player-button" + (this.state.prevAvailable ? '' : ' inactive'), onClick: this.prevClicked.bind(this) },
 	            _react2.default.createElement('i', { className: 'fa fa-backward' })
 	          ),
 	          _react2.default.createElement(
@@ -23350,7 +23414,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'player-button' },
+	            { className: "player-button" + (this.state.nextAvailable ? '' : ' inactive'), onClick: this.nextClicked.bind(this) },
 	            _react2.default.createElement('i', { className: 'fa fa-forward' })
 	          )
 	        ),
@@ -23372,7 +23436,7 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  return _extends({}, state.player);
+	  return _extends({}, state.player, { currentTrack: state.audios.items[state.player.currentTrackId], playlistLength: state.audios.items.length });
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Player);
@@ -23865,13 +23929,13 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	function player() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? { isPlaying: false, currentTrack: null, currentPosition: null, volume: 50 } : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? { isPlaying: false, currentTrackId: -1, currentPosition: null, volume: 50 } : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case 'PLAYER_LOAD_TRACK':
 	      return _extends({}, state, {
-	        currentTrack: action.track
+	        currentTrackId: action.trackId
 	      });
 	    case 'PLAYER_PLAY':
 	      return _extends({}, state, {
