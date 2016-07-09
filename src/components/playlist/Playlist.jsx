@@ -14,9 +14,9 @@ class Playlist extends React.Component {
     }
 
     trackClicked(track) {
-      const { dispatch, currentTrack } = this.props;
+      const { dispatch, currentTrack, audios } = this.props;
       if (track != currentTrack) {
-        dispatch(playerLoadTrack(track));
+        dispatch(playerLoadTrack(audios.indexOf(track)));
       }
     }
 
@@ -35,7 +35,7 @@ class Playlist extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: state.player.currentTrack};
+  return {isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: (state.player.currentTrackId == -1) ? null : state.audios.items[state.player.currentTrackId]};
 }
 
 export default connect(mapStateToProps)(Playlist);

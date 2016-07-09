@@ -1,7 +1,7 @@
-export function playerLoadTrack(track) {
+export function playerLoadTrack(trackId) {
   return {
     type: 'PLAYER_LOAD_TRACK',
-    track: track
+    trackId: trackId
   }
 }
 
@@ -23,13 +23,13 @@ function playerStop() {
   }
 }
 
-function playerNextTrack() {
+export function playerNextTrack() {
   return {
     type: 'PLAYER_NEXT_TRACK'
   }
 }
 
-function playerPrevTrack() {
+export function playerPrevTrack() {
   return {
     type: 'PLAYER_PREV_TRACK'
   }

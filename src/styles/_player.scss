@@ -20,7 +20,7 @@
         font-size: 2.1em;
         text-align: center;
 
-        .fa.inactive {
+        &.inactive {
           color: tint($base-black, 50%);
         }
 

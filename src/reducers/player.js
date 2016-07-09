@@ -1,8 +1,8 @@
-function player(state = {isPlaying: false, currentTrack: null, currentPosition: null, volume: 50}, action) {
+function player(state = {isPlaying: false, currentTrackId: -1, currentPosition: null, volume: 50}, action) {
   switch (action.type) {
     case 'PLAYER_LOAD_TRACK':
       return Object.assign({}, state, {
-        currentTrack: action.track
+        currentTrackId: action.trackId
       });
     case 'PLAYER_PLAY':
       return Object.assign({}, state, {
