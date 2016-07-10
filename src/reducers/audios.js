@@ -74,6 +74,7 @@ function _parseAudios(audios) {
 
       parsed.minDate = minDate;
       parsed.maxDate = maxDate;
+      parsed.dateFilter = maxDate;
       parsed.dateList = dateList.sort((a, b) => {
         let av = parseFloat(a.year + '.' + (a.monthNumber < 10 ? ('0' + String(a.monthNumber)) : a.monthNumber));
         let bv = parseFloat(b.year + '.' + (b.monthNumber < 10 ? ('0' + String(b.monthNumber)) : b.monthNumber));
@@ -90,11 +91,19 @@ function _parseAudios(audios) {
           return 0;
         }
 
-      })
+      });
       return parsed;
     }
 
-function audios(state = {isFetching: false, items: [], minDate: null, maxDate: null, dateList: [], dateFilter: null}, action) {
+let initialState = {
+  isFetching: false, 
+  items: [], 
+  minDate: null, 
+  maxDate: null,
+  dateList: [] 
+};
+
+function audios(state = initialState, action) {
   switch (action.type) {
     case 'REQUEST_AUDIOS':
       return Object.assign({}, state, {

@@ -22,17 +22,36 @@ class Playlist extends React.Component {
 
     render() {
         const {isFetching, audios, currentTrack, isPlaying, dateFilter} = this.props;
+        let tracks = null;
+        if (dateFilter && dateFilter.season == 'winter') {
+          if (dateFilter.monthNumber == 11) {
+            tracks = audios.filter(track => {
+              return (track.dateStamp.monthNumber == 0 || track.dateStamp.monthNumber == 1) && track.dateStamp.year == dateFilter.year + 1;
+            })
+            .concat(audios.filter(track => {
+              return track.dateStamp.monthNumber == 11 && track.dateStamp.year == dateFilter.year
+            }));
+          } else {
+            tracks = audios.filter(track => {
+              return (track.dateStamp.monthNumber == 0 || track.dateStamp.monthNumber == 1) && track.dateStamp.year == dateFilter.year;
+            })
+            .concat(audios.filter(track => {
+              return track.dateStamp.monthNumber == 11 && track.dateStamp.year == dateFilter.year - 1
+            }));
+          }
+        } else {
+          tracks = audios
+            .filter(track => {
+              if (dateFilter) {
+                return track.dateStamp.season == dateFilter.season && track.dateStamp.year == dateFilter.year;
+              }
+              return true;
+            });
+        }
 
-        let tracks = audios
-          .filter(track => {
-            if (dateFilter) {
-              return track.dateStamp.year == dateFilter.year && track.dateStamp.month == dateFilter.month;
-            }
-            return true;
-          })
-          .map(track => {
-              return <Track key={track.id} clickedHandler={this.trackClicked.bind(this, track)} current={(track == currentTrack)} isPlaying={isPlaying} {...track}  />
-          });
+        tracks = tracks.map(track => {
+                return <Track key={track.id} clickedHandler={this.trackClicked.bind(this, track)} current={(track == currentTrack)} isPlaying={isPlaying} {...track}  />
+            });
 
         if (isFetching) {
           return <Loader />

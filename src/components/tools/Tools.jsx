@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { dateSliderChange, dateSliderDragStart, dateSliderDragStop } from '../../actions/ui';
 import { setDateFilter } from '../../actions/audios'
 
+import Loader from '../Loader.jsx';
 import ReactSlider from 'react-slider';
 
 class Tools extends React.Component {
@@ -20,11 +21,10 @@ class Tools extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-      if (newProps && newProps.dateList) {
+      if (newProps && newProps.dateList && newProps.dateList != this.props.dateList) {
         let breakpoints = newProps.dateList.length;
-        let sliderMaxValue = breakpoints * 100 - 1;
-        this.setState({maxValue: sliderMaxValue, curValue: sliderMaxValue, itemRange: 100});
-        
+        let sliderMaxValue = breakpoints * 1000 - 1;
+        this.setState({maxValue: sliderMaxValue, curValue: sliderMaxValue, itemRange: 1000});
       }
     }
 
@@ -48,7 +48,7 @@ class Tools extends React.Component {
     }
 
     sliderChange() {
-      const { dispatch } = this.props;
+      const { dispatch, dateList } = this.props;
       const value = this.refs.dateSlider.getValue();
       const { itemRange } = this.state;
 
@@ -56,6 +56,7 @@ class Tools extends React.Component {
 
       this.setState({prevValue: this.state.curValue, curValue: this.refs.dateSlider.getValue(), listId: listId})
       dispatch(dateSliderChange(this.state.velocity)); 
+      dispatch(setDateFilter(dateList[this.state.listId]));
     }
 
     sliderAfterChange() {
@@ -69,19 +70,23 @@ class Tools extends React.Component {
     }
 
     render() {
-        const { dateList } = this.props;
-        const { listId } = this.state;
-        
-        let ready = false;
-        let curDate = null;
-        if (dateList && listId >= 0) {
-          curDate = dateList[listId];
-          ready = true;
-        }
+        const { dateFilter } = this.props;
 
+        let dateString = '';
+        if (dateFilter) {
+          dateString = dateFilter.season + ' ' + dateFilter.year;
+          if (dateFilter.season == 'winter') {
+            if (dateFilter.monthNumber == 11) {
+              dateString = dateFilter.season + ' ' + dateFilter.year + '-' + (dateFilter.year + 1);
+            } else {
+              dateString = dateFilter.season + ' ' + (dateFilter.year - 1) + '-' + dateFilter.year;
+            }
+          }
+        }
+      
         return <div className="tools">
                   <p className="date">
-                    {ready ? curDate.month + ' ' + curDate.year : ''} 
+                    {dateFilter ? dateString : <Loader />} 
                   </p>
 
                   <ReactSlider 
@@ -100,9 +105,11 @@ class Tools extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { minDate: state.audios.minDate, 
-           maxDate: state.audios.maxDate,
-           dateList: state.audios.dateList
+  const { minDate, maxDate, dateList, dateFilter } = state.audios;
+  return { minDate, 
+           maxDate,
+           dateList,
+           dateFilter
           };
 }
 
