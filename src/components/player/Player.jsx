@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import ReactSlider from 'react-slider';
 
 import { playerSetPlayState, playerLoadTrack } from '../../actions/player';
 
@@ -19,17 +20,16 @@ class Player extends React.Component {
 
     componentDidUpdate(prevProps) {
       const { currentTrack, currentTrackId, playlistLength, dispatch } = this.props;
-      const prevTrack = prevProps.currentTrack;
       const prevTrackId = prevProps.currentTrackId;
       const wasPlaying = prevProps.isPlaying;
 
-      if (currentTrack != null) {
-        if (currentTrack != prevTrack) {
+      if (currentTrackId != -1) {
+        if (currentTrackId != prevTrackId) {
           dispatch(playerSetPlayState('pause'));
           player.pause();
           player = new Audio(currentTrack.url);
 
-          if ((prevTrackId == -1 && currentTrackId == 0) || wasPlaying) {
+          if ((prevTrackId == -1 && currentTrackId >= 0) || wasPlaying) {
             dispatch(playerSetPlayState('play'));
             player.play();
           }
@@ -38,7 +38,7 @@ class Player extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-       const { currentTrackId, playlistLength } = newProps;
+      const { currentTrackId, playlistLength } = newProps;
       if (currentTrackId + 1 == playlistLength || currentTrackId == -1) {
         console.log()
         this.setState({nextAvailable: false});
@@ -101,7 +101,11 @@ class Player extends React.Component {
                     <div className={"player-button" + (this.state.nextAvailable ? '' : ' inactive')} onClick={this.nextClicked.bind(this)}><i className="fa fa-forward"></i></div>
                   </div>
                   <div className="player-seeker">a</div>
-                  <div className="player-volume">{volume}</div>
+                  <div className="player-volume">
+                    <ReactSlider value={volume} withBars>
+                      <div style={{height: '50px', width: '50px', background: 'red'}}></div>
+                    </ReactSlider>
+                  </div>
                 </div>;
     }
 }

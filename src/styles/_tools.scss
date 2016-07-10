@@ -28,11 +28,10 @@ $base-height: 28px;
         top: $base-height * 3 / 8;
         height: $base-height / 4;
         border-radius: 100px;
-        width: 100%;
         border: 1px solid $base-gray;
       }
 
-      .slider-body-filled {
+      .slider-body-0, .slider-body-filled {
         position: absolute;
         top: $base-height * 3 / 8;
         height: $base-height / 4;
@@ -44,9 +43,6 @@ $base-height: 28px;
       }
 
       .slider-handle {
-        position: absolute;
-        top: 0;
-        right: 50px;
         width: $base-height;
         height: $base-height;
         border-radius: 100px;

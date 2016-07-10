@@ -6,6 +6,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAudios, fetchUser } from '../actions';
 
+import Tools from './tools/Tools.jsx';
 import Playlist from './playlist/Playlist.jsx';
 import Player from './player/Player.jsx';
 
@@ -32,16 +33,7 @@ class Main extends React.Component {
                   <p className="made-by">made with &hearts; by <a href="http://oked.me">kd</a></p>
                 </header>
                 <section className="tools-container row">
-                  <div className="tools">
-                    <p className="date">
-                      summer 2016
-                    </p>
-                    <div className="slider">
-                      <div className="slider-body"></div>
-                      <div className="slider-body-filled"></div>
-                      <div className="slider-handle"></div>
-                    </div>
-                  </div>
+                    <Tools />
                 </section>
                 <section className="playlist-container">
                     <Playlist />

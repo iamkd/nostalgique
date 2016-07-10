@@ -22830,7 +22830,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22842,6 +22842,10 @@
 	var _reactRedux = __webpack_require__(171);
 
 	var _actions = __webpack_require__(194);
+
+	var _Tools = __webpack_require__(211);
+
+	var _Tools2 = _interopRequireDefault(_Tools);
 
 	var _Playlist = __webpack_require__(196);
 
@@ -22863,92 +22867,77 @@
 	// import Slider from 'rc-slider';
 
 	var Main = function (_React$Component) {
-	  _inherits(Main, _React$Component);
+	    _inherits(Main, _React$Component);
 
-	  function Main(props) {
-	    _classCallCheck(this, Main);
+	    function Main(props) {
+	        _classCallCheck(this, Main);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 
-	    _this.displayName = 'Main';
-	    return _this;
-	  }
-
-	  _createClass(Main, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var dispatch = this.props.dispatch;
-
-	      dispatch((0, _actions.fetchAudios)());
-	      dispatch((0, _actions.fetchUser)());
+	        _this.displayName = 'Main';
+	        return _this;
 	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      // if (this.props.isFetching) {
-	      //   return <div>Fetching...</div>
-	      // } else {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'page app-page page-flex' },
-	        _react2.default.createElement(
-	          'header',
-	          { className: 'app-header' },
-	          _react2.default.createElement(
-	            'h1',
-	            { className: 'logo small' },
-	            'nostalgique'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'made-by' },
-	            'made with ♥ by ',
-	            _react2.default.createElement(
-	              'a',
-	              { href: 'http://oked.me' },
-	              'kd'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          { className: 'tools-container row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'tools' },
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'date' },
-	              'summer 2016'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'slider' },
-	              _react2.default.createElement('div', { className: 'slider-body' }),
-	              _react2.default.createElement('div', { className: 'slider-body-filled' }),
-	              _react2.default.createElement('div', { className: 'slider-handle' })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          { className: 'playlist-container' },
-	          _react2.default.createElement(_Playlist2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          { className: 'player-container' },
-	          _react2.default.createElement(_Player2.default, null)
-	        )
-	      );
-	    }
-	  }]);
 
-	  return Main;
+	    _createClass(Main, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var dispatch = this.props.dispatch;
+
+	            dispatch((0, _actions.fetchAudios)());
+	            dispatch((0, _actions.fetchUser)());
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            // if (this.props.isFetching) {
+	            //   return <div>Fetching...</div>
+	            // } else {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page app-page page-flex' },
+	                _react2.default.createElement(
+	                    'header',
+	                    { className: 'app-header' },
+	                    _react2.default.createElement(
+	                        'h1',
+	                        { className: 'logo small' },
+	                        'nostalgique'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'made-by' },
+	                        'made with ♥ by ',
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: 'http://oked.me' },
+	                            'kd'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'section',
+	                    { className: 'tools-container row' },
+	                    _react2.default.createElement(_Tools2.default, null)
+	                ),
+	                _react2.default.createElement(
+	                    'section',
+	                    { className: 'playlist-container' },
+	                    _react2.default.createElement(_Playlist2.default, null)
+	                ),
+	                _react2.default.createElement(
+	                    'section',
+	                    { className: 'player-container' },
+	                    _react2.default.createElement(_Player2.default, null)
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Main;
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  return {};
+	    return {};
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Main);
@@ -23024,6 +23013,18 @@
 	      var isFetching = _props2.isFetching;
 	      var audios = _props2.audios;
 	      var currentTrack = _props2.currentTrack;
+	      var isPlaying = _props2.isPlaying;
+	      var dateFilter = _props2.dateFilter;
+
+
+	      var tracks = audios.filter(function (track) {
+	        if (dateFilter) {
+	          return track.dateStamp.year == dateFilter.year && track.dateStamp.month == dateFilter.month;
+	        }
+	        return true;
+	      }).map(function (track) {
+	        return _react2.default.createElement(_Track2.default, _extends({ key: track.id, clickedHandler: _this2.trackClicked.bind(_this2, track), current: track == currentTrack, isPlaying: isPlaying }, track));
+	      });
 
 	      if (isFetching) {
 	        return _react2.default.createElement(_Loader2.default, null);
@@ -23031,9 +23032,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { className: 'playlist' },
-	          audios.map(function (track) {
-	            return _react2.default.createElement(_Track2.default, _extends({ key: track.id, clickedHandler: _this2.trackClicked.bind(_this2, track), current: track == currentTrack }, track));
-	          })
+	          tracks
 	        );
 	      }
 	    }
@@ -23043,7 +23042,7 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  return { isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: state.player.currentTrackId == -1 ? null : state.audios.items[state.player.currentTrackId] };
+	  return { isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: state.player.currentTrackId == -1 ? null : state.audios.items[state.player.currentTrackId], isPlaying: state.player.isPlaying, dateFilter: state.audios.dateFilter };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Playlist);
@@ -23055,7 +23054,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -23073,54 +23072,64 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Track = function (_React$Component) {
-	    _inherits(Track, _React$Component);
+	  _inherits(Track, _React$Component);
 
-	    function Track(props) {
-	        _classCallCheck(this, Track);
+	  function Track(props) {
+	    _classCallCheck(this, Track);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Track).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Track).call(this, props));
 
-	        _this.displayName = 'Track';
-	        return _this;
+	    _this.displayName = 'Track';
+	    return _this;
+	  }
+
+	  _createClass(Track, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var id = _props.id;
+	      var artist = _props.artist;
+	      var title = _props.title;
+	      var dateStamp = _props.dateStamp;
+	      var current = _props.current;
+	      var clickedHandler = _props.clickedHandler;
+	      var isPlaying = _props.isPlaying;
+
+	      //very long dash
+
+	      var name = artist + ' ' + String.fromCharCode(8212) + ' ' + title;
+
+	      if (name.length > 60) {
+	        name = name.substring(0, 60) + '...';
+	      }
+
+	      var trackClass = 'track';
+	      if (current) {
+	        trackClass += ' active';
+	      }
+	      if (isPlaying) {
+	        trackClass += ' is-playing';
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { onClick: clickedHandler, className: trackClass },
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'track-row' },
+	          _react2.default.createElement('i', { className: 'playing-icon fa fa-music' }),
+	          name,
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'track-info' },
+	            dateStamp.month + ' ' + dateStamp.year
+	          )
+	        )
+	      );
 	    }
+	  }]);
 
-	    _createClass(Track, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var id = _props.id;
-	            var artist = _props.artist;
-	            var title = _props.title;
-	            var dateStamp = _props.dateStamp;
-	            var current = _props.current;
-	            var clickedHandler = _props.clickedHandler;
-
-
-	            var name = artist + " - " + title;
-
-	            if (name.length > 60) {
-	                name = name.substring(0, 60) + '...';
-	            }
-
-	            return _react2.default.createElement(
-	                'div',
-	                { onClick: clickedHandler, className: "track" + (current ? ' active' : '') },
-	                _react2.default.createElement(
-	                    'p',
-	                    { className: 'track-row' },
-	                    _react2.default.createElement('i', { className: 'playing-icon fa fa-music' }),
-	                    name,
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'track-info' },
-	                        dateStamp.month + ' ' + dateStamp.year
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Track;
+	  return Track;
 	}(_react2.default.Component);
 
 	exports.default = Track;
@@ -23268,6 +23277,10 @@
 
 	var _reactRedux = __webpack_require__(171);
 
+	var _reactSlider = __webpack_require__(210);
+
+	var _reactSlider2 = _interopRequireDefault(_reactSlider);
+
 	var _player = __webpack_require__(199);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -23306,17 +23319,16 @@
 	      var playlistLength = _props.playlistLength;
 	      var dispatch = _props.dispatch;
 
-	      var prevTrack = prevProps.currentTrack;
 	      var prevTrackId = prevProps.currentTrackId;
 	      var wasPlaying = prevProps.isPlaying;
 
-	      if (currentTrack != null) {
-	        if (currentTrack != prevTrack) {
+	      if (currentTrackId != -1) {
+	        if (currentTrackId != prevTrackId) {
 	          dispatch((0, _player.playerSetPlayState)('pause'));
 	          player.pause();
 	          player = new Audio(currentTrack.url);
 
-	          if (prevTrackId == -1 && currentTrackId == 0 || wasPlaying) {
+	          if (prevTrackId == -1 && currentTrackId >= 0 || wasPlaying) {
 	            dispatch((0, _player.playerSetPlayState)('play'));
 	            player.play();
 	          }
@@ -23426,7 +23438,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'player-volume' },
-	          volume
+	          _react2.default.createElement(
+	            _reactSlider2.default,
+	            { value: volume, withBars: true },
+	            _react2.default.createElement('div', { style: { height: '50px', width: '50px', background: 'red' } })
+	          )
 	        )
 	      );
 	    }
@@ -23769,13 +23785,18 @@
 
 	var _player2 = _interopRequireDefault(_player);
 
+	var _ui = __webpack_require__(212);
+
+	var _ui2 = _interopRequireDefault(_ui);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var appReducers = (0, _redux.combineReducers)({
 	  audios: _audios2.default,
 	  auth: _auth2.default,
 	  user: _user2.default,
-	  player: _player2.default
+	  player: _player2.default,
+	  ui: _ui2.default
 	});
 
 	exports.default = appReducers;
@@ -23793,7 +23814,14 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	function _parseAudios(audios) {
-	  return audios.map(function (audio) {
+	  var parsed = {};
+
+	  var minDate = void 0,
+	      maxDate = void 0;
+
+	  var dateList = [];
+
+	  parsed.items = audios.map(function (audio) {
 	    var date = new Date(audio.date * 1000);
 
 	    var getSeason = function getSeason(month) {
@@ -23819,17 +23847,70 @@
 	    var dateStamp = {
 	      year: date.getFullYear(),
 	      month: getMonthName(date.getMonth()),
+	      monthNumber: date.getMonth(),
 	      season: getSeason(date.getMonth())
 	    };
+
+	    var hasDate = false;
+	    for (var i = 0; i < dateList.length; i++) {
+	      if (JSON.stringify(dateList[i]) == JSON.stringify(dateStamp)) {
+	        hasDate = true;
+	      }
+	    }
+
+	    if (!hasDate) {
+	      dateList.push(dateStamp);
+	    }
+
+	    //very stupid idea, but it works!
+
+	    var yearMonth = parseFloat(dateStamp.year + '.' + (dateStamp.monthNumber < 10 ? '0' + String(dateStamp.monthNumber) : dateStamp.monthNumber));
+
+	    if (minDate == null) {
+	      minDate = _extends({}, dateStamp);
+	    }
+	    if (maxDate == null) {
+	      maxDate = _extends({}, dateStamp);
+	    }
+
+	    var minYearMonth = parseFloat(minDate.year + '.' + (minDate.monthNumber < 10 ? '0' + String(minDate.monthNumber) : minDate.monthNumber));
+	    var maxYearMonth = parseFloat(maxDate.year + '.' + (maxDate.monthNumber < 10 ? '0' + String(maxDate.monthNumber) : maxDate.monthNumber));
+
+	    if (minYearMonth > yearMonth) {
+	      minDate = _extends({}, dateStamp);
+	    }
+	    if (maxYearMonth < yearMonth) {
+	      maxDate = _extends({}, dateStamp);
+	    }
 
 	    audio.dateStamp = dateStamp;
 
 	    return audio;
 	  });
+
+	  parsed.minDate = minDate;
+	  parsed.maxDate = maxDate;
+	  parsed.dateList = dateList.sort(function (a, b) {
+	    var av = parseFloat(a.year + '.' + (a.monthNumber < 10 ? '0' + String(a.monthNumber) : a.monthNumber));
+	    var bv = parseFloat(b.year + '.' + (b.monthNumber < 10 ? '0' + String(b.monthNumber) : b.monthNumber));
+
+	    if (av < bv) {
+	      return -1;
+	    }
+
+	    if (av > bv) {
+	      return 1;
+	    }
+
+	    if (av == bv) {
+	      return 0;
+	    }
+	  });
+	  return parsed;
 	}
 
 	function audios() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? { isFetching: false, items: [] } : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? { isFetching: false, items: [], minDate: null, maxDate: null, dateList: [], dateFilter: null } : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
@@ -23838,9 +23919,14 @@
 	        isFetching: true
 	      });
 	    case 'RECEIVE_AUDIOS':
+	      var parsed = _parseAudios(action.items);
+	      console.log(parsed);
+	      return _extends({}, state, _extends({
+	        isFetching: false
+	      }, parsed));
+	    case 'PLAYLIST_SET_FILTER':
 	      return _extends({}, state, {
-	        isFetching: false,
-	        items: _parseAudios(action.items)
+	        dateFilter: action.date
 	      });
 	    default:
 	      return state;
@@ -23951,6 +24037,1072 @@
 	}
 
 	exports.default = player;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports === 'object') {
+	    module.exports = factory(require('react'));
+	  } else {
+	    root.ReactSlider = factory(root.React);
+	  }
+	}(this, function (React) {
+
+	  /**
+	   * To prevent text selection while dragging.
+	   * http://stackoverflow.com/questions/5429827/how-can-i-prevent-text-element-selection-with-cursor-drag
+	   */
+	  function pauseEvent(e) {
+	    if (e.stopPropagation) e.stopPropagation();
+	    if (e.preventDefault) e.preventDefault();
+	    e.cancelBubble = true;
+	    e.returnValue = false;
+	    return false;
+	  }
+
+	  function stopPropagation(e) {
+	    if (e.stopPropagation) e.stopPropagation();
+	    e.cancelBubble = true;
+	  }
+
+	  /**
+	   * Spreads `count` values equally between `min` and `max`.
+	   */
+	  function linspace(min, max, count) {
+	    var range = (max - min) / (count - 1);
+	    var res = [];
+	    for (var i = 0; i < count; i++) {
+	      res.push(min + range * i);
+	    }
+	    return res;
+	  }
+
+	  function ensureArray(x) {
+	    return x == null ? [] : Array.isArray(x) ? x : [x];
+	  }
+
+	  function undoEnsureArray(x) {
+	    return x != null && x.length === 1 ? x[0] : x;
+	  }
+
+	  // undoEnsureArray(ensureArray(x)) === x
+
+	  var ReactSlider = React.createClass({
+	    displayName: 'ReactSlider',
+
+	    propTypes: {
+
+	      /**
+	       * The minimum value of the slider.
+	       */
+	      min: React.PropTypes.number,
+
+	      /**
+	       * The maximum value of the slider.
+	       */
+	      max: React.PropTypes.number,
+
+	      /**
+	       * Value to be added or subtracted on each step the slider makes.
+	       * Must be greater than zero.
+	       * `max - min` should be evenly divisible by the step value.
+	       */
+	      step: React.PropTypes.number,
+
+	      /**
+	       * The minimal distance between any pair of handles.
+	       * Must be positive, but zero means they can sit on top of each other.
+	       */
+	      minDistance: React.PropTypes.number,
+
+	      /**
+	       * Determines the initial positions of the handles and the number of handles if the component has no children.
+	       *
+	       * If a number is passed a slider with one handle will be rendered.
+	       * If an array is passed each value will determine the position of one handle.
+	       * The values in the array must be sorted.
+	       * If the component has children, the length of the array must match the number of children.
+	       */
+	      defaultValue: React.PropTypes.oneOfType([
+	        React.PropTypes.number,
+	        React.PropTypes.arrayOf(React.PropTypes.number)
+	      ]),
+
+	      /**
+	       * Like `defaultValue` but for [controlled components](http://facebook.github.io/react/docs/forms.html#controlled-components).
+	       */
+	      value: React.PropTypes.oneOfType([
+	        React.PropTypes.number,
+	        React.PropTypes.arrayOf(React.PropTypes.number)
+	      ]),
+
+	      /**
+	       * Determines whether the slider moves horizontally (from left to right) or vertically (from top to bottom).
+	       */
+	      orientation: React.PropTypes.oneOf(['horizontal', 'vertical']),
+
+	      /**
+	       * The css class set on the slider node.
+	       */
+	      className: React.PropTypes.string,
+
+	      /**
+	       * The css class set on each handle node.
+	       *
+	       * In addition each handle will receive a numbered css class of the form `${handleClassName}-${i}`,
+	       * e.g. `handle-0`, `handle-1`, ...
+	       */
+	      handleClassName: React.PropTypes.string,
+
+	      /**
+	       * The css class set on the handle that is currently being moved.
+	       */
+	      handleActiveClassName: React.PropTypes.string,
+
+	      /**
+	       * If `true` bars between the handles will be rendered.
+	       */
+	      withBars: React.PropTypes.bool,
+
+	      /**
+	       * The css class set on the bars between the handles.
+	       * In addition bar fragment will receive a numbered css class of the form `${barClassName}-${i}`,
+	       * e.g. `bar-0`, `bar-1`, ...
+	       */
+	      barClassName: React.PropTypes.string,
+
+	      /**
+	       * If `true` the active handle will push other handles
+	       * within the constraints of `min`, `max`, `step` and `minDistance`.
+	       */
+	      pearling: React.PropTypes.bool,
+
+	      /**
+	       * If `true` the handles can't be moved.
+	       */
+	      disabled: React.PropTypes.bool,
+
+	      /**
+	       * Disables handle move when clicking the slider bar
+	       */
+	      snapDragDisabled: React.PropTypes.bool,
+
+	      /**
+	       * Inverts the slider.
+	       */
+	      invert: React.PropTypes.bool,
+
+	      /**
+	       * Callback called before starting to move a handle.
+	       */
+	      onBeforeChange: React.PropTypes.func,
+
+	      /**
+	       * Callback called on every value change.
+	       */
+	      onChange: React.PropTypes.func,
+
+	      /**
+	       * Callback called only after moving a handle has ended.
+	       */
+	      onAfterChange: React.PropTypes.func,
+
+	      /**
+	       *  Callback called when the the slider is clicked (handle or bars).
+	       *  Receives the value at the clicked position as argument.
+	       */
+	      onSliderClick: React.PropTypes.func
+	    },
+
+	    getDefaultProps: function () {
+	      return {
+	        min: 0,
+	        max: 100,
+	        step: 1,
+	        minDistance: 0,
+	        defaultValue: 0,
+	        orientation: 'horizontal',
+	        className: 'slider',
+	        handleClassName: 'handle',
+	        handleActiveClassName: 'active',
+	        barClassName: 'bar',
+	        withBars: false,
+	        pearling: false,
+	        disabled: false,
+	        snapDragDisabled: false,
+	        invert: false
+	      };
+	    },
+
+	    getInitialState: function () {
+	      var value = this._or(ensureArray(this.props.value), ensureArray(this.props.defaultValue));
+
+	      // reused throughout the component to store results of iterations over `value`
+	      this.tempArray = value.slice();
+
+	      // array for storing resize timeouts ids
+	      this.pendingResizeTimeouts = [];
+
+	      var zIndices = [];
+	      for (var i = 0; i < value.length; i++) {
+	        value[i] = this._trimAlignValue(value[i], this.props);
+	        zIndices.push(i);
+	      }
+
+	      return {
+	        index: -1,
+	        upperBound: 0,
+	        sliderLength: 0,
+	        value: value,
+	        zIndices: zIndices
+	      };
+	    },
+
+	    // Keep the internal `value` consistent with an outside `value` if present.
+	    // This basically allows the slider to be a controlled component.
+	    componentWillReceiveProps: function (newProps) {
+	      var value = this._or(ensureArray(newProps.value), this.state.value);
+
+	      // ensure the array keeps the same size as `value`
+	      this.tempArray = value.slice();
+
+	      for (var i = 0; i < value.length; i++) {
+	        this.state.value[i] = this._trimAlignValue(value[i], newProps);
+	      }
+	      if (this.state.value.length > value.length)
+	        this.state.value.length = value.length;
+
+	      // If an upperBound has not yet been determined (due to the component being hidden
+	      // during the mount event, or during the last resize), then calculate it now
+	      if (this.state.upperBound === 0) {
+	        this._handleResize();
+	      }
+	    },
+
+	    // Check if the arity of `value` or `defaultValue` matches the number of children (= number of custom handles).
+	    // If no custom handles are provided, just returns `value` if present and `defaultValue` otherwise.
+	    // If custom handles are present but neither `value` nor `defaultValue` are applicable the handles are spread out
+	    // equally.
+	    // TODO: better name? better solution?
+	    _or: function (value, defaultValue) {
+	      var count = React.Children.count(this.props.children);
+	      switch (count) {
+	        case 0:
+	          return value.length > 0 ? value : defaultValue;
+	        case value.length:
+	          return value;
+	        case defaultValue.length:
+	          return defaultValue;
+	        default:
+	          if (value.length !== count || defaultValue.length !== count) {
+	            console.warn(this.constructor.displayName + ": Number of values does not match number of children.");
+	          }
+	          return linspace(this.props.min, this.props.max, count);
+	      }
+	    },
+
+	    componentDidMount: function () {
+	      window.addEventListener('resize', this._handleResize);
+	      this._handleResize();
+	    },
+
+	    componentWillUnmount: function () {
+	      this._clearPendingResizeTimeouts();
+	      window.removeEventListener('resize', this._handleResize);
+	    },
+
+	    getValue: function () {
+	      return undoEnsureArray(this.state.value);
+	    },
+
+	    _handleResize: function () {
+	      // setTimeout of 0 gives element enough time to have assumed its new size if it is being resized
+	      var resizeTimeout = window.setTimeout(function() {
+	        // drop this timeout from pendingResizeTimeouts to reduce memory usage
+	        this.pendingResizeTimeouts.shift();
+
+	        var slider = this.refs.slider;
+	        var handle = this.refs.handle0;
+	        var rect = slider.getBoundingClientRect();
+
+	        var size = this._sizeKey();
+
+	        var sliderMax = rect[this._posMaxKey()];
+	        var sliderMin = rect[this._posMinKey()];
+
+	        this.setState({
+	          upperBound: slider[size] - handle[size],
+	          sliderLength: Math.abs(sliderMax - sliderMin),
+	          handleSize: handle[size],
+	          sliderStart: this.props.invert ? sliderMax : sliderMin
+	        });
+	      }.bind(this), 0);
+
+	      this.pendingResizeTimeouts.push(resizeTimeout);
+	    },
+
+	    // clear all pending timeouts to avoid error messages after unmounting
+	    _clearPendingResizeTimeouts: function() {
+	      do {
+	        var nextTimeout = this.pendingResizeTimeouts.shift();
+
+	        clearTimeout(nextTimeout);
+	      } while (this.pendingResizeTimeouts.length);
+	    },
+
+	    // calculates the offset of a handle in pixels based on its value.
+	    _calcOffset: function (value) {
+	      var ratio = (value - this.props.min) / (this.props.max - this.props.min);
+	      return ratio * this.state.upperBound;
+	    },
+
+	    // calculates the value corresponding to a given pixel offset, i.e. the inverse of `_calcOffset`.
+	    _calcValue: function (offset) {
+	      var ratio = offset / this.state.upperBound;
+	      return ratio * (this.props.max - this.props.min) + this.props.min;
+	    },
+
+	    _buildHandleStyle: function (offset, i) {
+	      var style = {
+	        position: 'absolute',
+	        willChange: this.state.index >= 0 ? this._posMinKey() : '',
+	        zIndex: this.state.zIndices.indexOf(i) + 1
+	      };
+	      style[this._posMinKey()] = offset + 'px';
+	      return style;
+	    },
+
+	    _buildBarStyle: function (min, max) {
+	      var obj = {
+	        position: 'absolute',
+	        willChange: this.state.index >= 0 ? this._posMinKey() + ',' + this._posMaxKey() : ''
+	      };
+	      obj[this._posMinKey()] = min;
+	      obj[this._posMaxKey()] = max;
+	      return obj;
+	    },
+
+	    _getClosestIndex: function (pixelOffset) {
+	      var minDist = Number.MAX_VALUE;
+	      var closestIndex = -1;
+
+	      var value = this.state.value;
+	      var l = value.length;
+
+	      for (var i = 0; i < l; i++) {
+	        var offset = this._calcOffset(value[i]);
+	        var dist = Math.abs(pixelOffset - offset);
+	        if (dist < minDist) {
+	          minDist = dist;
+	          closestIndex = i;
+	        }
+	      }
+
+	      return closestIndex;
+	    },
+
+	    _calcOffsetFromPosition: function (position) {
+	      var pixelOffset = position - this.state.sliderStart;
+	      if (this.props.invert) pixelOffset = this.state.sliderLength - pixelOffset;
+	      pixelOffset -= (this.state.handleSize / 2);
+	      return pixelOffset;
+	    },
+
+	    // Snaps the nearest handle to the value corresponding to `position` and calls `callback` with that handle's index.
+	    _forceValueFromPosition: function (position, callback) {
+	      var pixelOffset = this._calcOffsetFromPosition(position);
+	      var closestIndex = this._getClosestIndex(pixelOffset);
+	      var nextValue = this._trimAlignValue(this._calcValue(pixelOffset));
+
+	      var value = this.state.value.slice(); // Clone this.state.value since we'll modify it temporarily
+	      value[closestIndex] = nextValue;
+
+	      // Prevents the slider from shrinking below `props.minDistance`
+	      for (var i = 0; i < value.length - 1; i += 1) {
+	        if (value[i + 1] - value[i] < this.props.minDistance) return;
+	      }
+
+	      this.setState({value: value}, callback.bind(this, closestIndex));
+	    },
+
+	    _getMousePosition: function (e) {
+	      return [
+	        e['page' + this._axisKey()],
+	        e['page' + this._orthogonalAxisKey()]
+	      ];
+	    },
+
+	    _getTouchPosition: function (e) {
+	      var touch = e.touches[0];
+	      return [
+	        touch['page' + this._axisKey()],
+	        touch['page' + this._orthogonalAxisKey()]
+	      ];
+	    },
+
+	    _getMouseEventMap: function () {
+	      return {
+	        'mousemove': this._onMouseMove,
+	        'mouseup': this._onMouseUp
+	      }
+	    },
+
+	    _getTouchEventMap: function () {
+	      return {
+	        'touchmove': this._onTouchMove,
+	        'touchend': this._onTouchEnd
+	      }
+	    },
+
+	    // create the `mousedown` handler for the i-th handle
+	    _createOnMouseDown: function (i) {
+	      return function (e) {
+	        if (this.props.disabled) return;
+	        var position = this._getMousePosition(e);
+	        this._start(i, position[0]);
+	        this._addHandlers(this._getMouseEventMap());
+	        pauseEvent(e);
+	      }.bind(this);
+	    },
+
+	    // create the `touchstart` handler for the i-th handle
+	    _createOnTouchStart: function (i) {
+	      return function (e) {
+	        if (this.props.disabled || e.touches.length > 1) return;
+	        var position = this._getTouchPosition(e);
+	        this.startPosition = position;
+	        this.isScrolling = undefined; // don't know yet if the user is trying to scroll
+	        this._start(i, position[0]);
+	        this._addHandlers(this._getTouchEventMap());
+	        stopPropagation(e);
+	      }.bind(this);
+	    },
+
+	    _addHandlers: function (eventMap) {
+	      for (var key in eventMap) {
+	        document.addEventListener(key, eventMap[key], false);
+	      }
+	    },
+
+	    _removeHandlers: function (eventMap) {
+	      for (var key in eventMap) {
+	        document.removeEventListener(key, eventMap[key], false);
+	      }
+	    },
+
+	    _start: function (i, position) {
+	      // if activeElement is body window will lost focus in IE9
+	      if (document.activeElement && document.activeElement != document.body) {
+	        document.activeElement.blur();
+	      }
+
+	      this.hasMoved = false;
+
+	      this._fireChangeEvent('onBeforeChange');
+
+	      var zIndices = this.state.zIndices;
+	      zIndices.splice(zIndices.indexOf(i), 1); // remove wherever the element is
+	      zIndices.push(i); // add to end
+
+	      this.setState({
+	        startValue: this.state.value[i],
+	        startPosition: position,
+	        index: i,
+	        zIndices: zIndices
+	      });
+	    },
+
+	    _onMouseUp: function () {
+	      this._onEnd(this._getMouseEventMap());
+	    },
+
+	    _onTouchEnd: function () {
+	      this._onEnd(this._getTouchEventMap());
+	    },
+
+	    _onEnd: function (eventMap) {
+	      this._removeHandlers(eventMap);
+	      this.setState({index: -1}, this._fireChangeEvent.bind(this, 'onAfterChange'));
+	    },
+
+	    _onMouseMove: function (e) {
+	      var position = this._getMousePosition(e);
+	      this._move(position[0]);
+	    },
+
+	    _onTouchMove: function (e) {
+	      if (e.touches.length > 1) return;
+
+	      var position = this._getTouchPosition(e);
+
+	      if (typeof this.isScrolling === 'undefined') {
+	        var diffMainDir = position[0] - this.startPosition[0];
+	        var diffScrollDir = position[1] - this.startPosition[1];
+	        this.isScrolling = Math.abs(diffScrollDir) > Math.abs(diffMainDir);
+	      }
+
+	      if (this.isScrolling) {
+	        this.setState({index: -1});
+	        return;
+	      }
+
+	      pauseEvent(e);
+
+	      this._move(position[0]);
+	    },
+
+	    _move: function (position) {
+	      this.hasMoved = true;
+
+	      var props = this.props;
+	      var state = this.state;
+	      var index = state.index;
+
+	      var value = state.value;
+	      var length = value.length;
+	      var oldValue = value[index];
+
+	      var diffPosition = position - state.startPosition;
+	      if (props.invert) diffPosition *= -1;
+
+	      var diffValue = diffPosition / (state.sliderLength - state.handleSize) * (props.max - props.min);
+	      var newValue = this._trimAlignValue(state.startValue + diffValue);
+
+	      var minDistance = props.minDistance;
+
+	      // if "pearling" (= handles pushing each other) is disabled,
+	      // prevent the handle from getting closer than `minDistance` to the previous or next handle.
+	      if (!props.pearling) {
+	        if (index > 0) {
+	          var valueBefore = value[index - 1];
+	          if (newValue < valueBefore + minDistance) {
+	            newValue = valueBefore + minDistance;
+	          }
+	        }
+
+	        if (index < length - 1) {
+	          var valueAfter = value[index + 1];
+	          if (newValue > valueAfter - minDistance) {
+	            newValue = valueAfter - minDistance;
+	          }
+	        }
+	      }
+
+	      value[index] = newValue;
+
+	      // if "pearling" is enabled, let the current handle push the pre- and succeeding handles.
+	      if (props.pearling && length > 1) {
+	        if (newValue > oldValue) {
+	          this._pushSucceeding(value, minDistance, index);
+	          this._trimSucceeding(length, value, minDistance, props.max);
+	        }
+	        else if (newValue < oldValue) {
+	          this._pushPreceding(value, minDistance, index);
+	          this._trimPreceding(length, value, minDistance, props.min);
+	        }
+	      }
+
+	      // Normally you would use `shouldComponentUpdate`, but since the slider is a low-level component,
+	      // the extra complexity might be worth the extra performance.
+	      if (newValue !== oldValue) {
+	        this.setState({value: value}, this._fireChangeEvent.bind(this, 'onChange'));
+	      }
+	    },
+
+	    _pushSucceeding: function (value, minDistance, index) {
+	      var i, padding;
+	      for (i = index, padding = value[i] + minDistance;
+	           value[i + 1] != null && padding > value[i + 1];
+	           i++, padding = value[i] + minDistance) {
+	        value[i + 1] = this._alignValue(padding);
+	      }
+	    },
+
+	    _trimSucceeding: function (length, nextValue, minDistance, max) {
+	      for (var i = 0; i < length; i++) {
+	        var padding = max - i * minDistance;
+	        if (nextValue[length - 1 - i] > padding) {
+	          nextValue[length - 1 - i] = padding;
+	        }
+	      }
+	    },
+
+	    _pushPreceding: function (value, minDistance, index) {
+	      var i, padding;
+	      for (i = index, padding = value[i] - minDistance;
+	           value[i - 1] != null && padding < value[i - 1];
+	           i--, padding = value[i] - minDistance) {
+	        value[i - 1] = this._alignValue(padding);
+	      }
+	    },
+
+	    _trimPreceding: function (length, nextValue, minDistance, min) {
+	      for (var i = 0; i < length; i++) {
+	        var padding = min + i * minDistance;
+	        if (nextValue[i] < padding) {
+	          nextValue[i] = padding;
+	        }
+	      }
+	    },
+
+	    _axisKey: function () {
+	      var orientation = this.props.orientation;
+	      if (orientation === 'horizontal') return 'X';
+	      if (orientation === 'vertical') return 'Y';
+	    },
+
+	    _orthogonalAxisKey: function () {
+	      var orientation = this.props.orientation;
+	      if (orientation === 'horizontal') return 'Y';
+	      if (orientation === 'vertical') return 'X';
+	    },
+
+	    _posMinKey: function () {
+	      var orientation = this.props.orientation;
+	      if (orientation === 'horizontal') return this.props.invert ? 'right' : 'left';
+	      if (orientation === 'vertical') return this.props.invert ? 'bottom' : 'top';
+	    },
+
+	    _posMaxKey: function () {
+	      var orientation = this.props.orientation;
+	      if (orientation === 'horizontal') return this.props.invert ? 'left' : 'right';
+	      if (orientation === 'vertical') return this.props.invert ? 'top' : 'bottom';
+	    },
+
+	    _sizeKey: function () {
+	      var orientation = this.props.orientation;
+	      if (orientation === 'horizontal') return 'clientWidth';
+	      if (orientation === 'vertical') return 'clientHeight';
+	    },
+
+	    _trimAlignValue: function (val, props) {
+	      return this._alignValue(this._trimValue(val, props), props);
+	    },
+
+	    _trimValue: function (val, props) {
+	      props = props || this.props;
+
+	      if (val <= props.min) val = props.min;
+	      if (val >= props.max) val = props.max;
+
+	      return val;
+	    },
+
+	    _alignValue: function (val, props) {
+	      props = props || this.props;
+
+	      var valModStep = (val - props.min) % props.step;
+	      var alignValue = val - valModStep;
+
+	      if (Math.abs(valModStep) * 2 >= props.step) {
+	        alignValue += (valModStep > 0) ? props.step : (-props.step);
+	      }
+
+	      return parseFloat(alignValue.toFixed(5));
+	    },
+
+	    _renderHandle: function (style, child, i) {
+	      var className = this.props.handleClassName + ' ' +
+	        (this.props.handleClassName + '-' + i) + ' ' +
+	        (this.state.index === i ? this.props.handleActiveClassName : '');
+
+	      return (
+	        React.createElement('div', {
+	            ref: 'handle' + i,
+	            key: 'handle' + i,
+	            className: className,
+	            style: style,
+	            onMouseDown: this._createOnMouseDown(i),
+	            onTouchStart: this._createOnTouchStart(i)
+	          },
+	          child
+	        )
+	      );
+	    },
+
+	    _renderHandles: function (offset) {
+	      var length = offset.length;
+
+	      var styles = this.tempArray;
+	      for (var i = 0; i < length; i++) {
+	        styles[i] = this._buildHandleStyle(offset[i], i);
+	      }
+
+	      var res = this.tempArray;
+	      var renderHandle = this._renderHandle;
+	      if (React.Children.count(this.props.children) > 0) {
+	        React.Children.forEach(this.props.children, function (child, i) {
+	          res[i] = renderHandle(styles[i], child, i);
+	        });
+	      } else {
+	        for (i = 0; i < length; i++) {
+	          res[i] = renderHandle(styles[i], null, i);
+	        }
+	      }
+	      return res;
+	    },
+
+	    _renderBar: function (i, offsetFrom, offsetTo) {
+	      return (
+	        React.createElement('div', {
+	          key: 'bar' + i,
+	          ref: 'bar' + i,
+	          className: this.props.barClassName + ' ' + this.props.barClassName + '-' + i,
+	          style: this._buildBarStyle(offsetFrom, this.state.upperBound - offsetTo)
+	        })
+	      );
+	    },
+
+	    _renderBars: function (offset) {
+	      var bars = [];
+	      var lastIndex = offset.length - 1;
+
+	      bars.push(this._renderBar(0, 0, offset[0]));
+
+	      for (var i = 0; i < lastIndex; i++) {
+	        bars.push(this._renderBar(i + 1, offset[i], offset[i + 1]));
+	      }
+
+	      bars.push(this._renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+
+	      return bars;
+	    },
+
+	    _onSliderMouseDown: function (e) {
+	      if (this.props.disabled) return;
+	      this.hasMoved = false;
+	      if (!this.props.snapDragDisabled) {
+	        var position = this._getMousePosition(e);
+	        this._forceValueFromPosition(position[0], function (i) {
+	          this._fireChangeEvent('onChange');
+	          this._start(i, position[0]);
+	          this._addHandlers(this._getMouseEventMap());
+	        }.bind(this));
+	      }
+
+	      pauseEvent(e);
+	    },
+
+	    _onSliderClick: function (e) {
+	      if (this.props.disabled) return;
+
+	      if (this.props.onSliderClick && !this.hasMoved) {
+	        var position = this._getMousePosition(e);
+	        var valueAtPos = this._trimAlignValue(this._calcValue(this._calcOffsetFromPosition(position[0])));
+	        this.props.onSliderClick(valueAtPos);
+	      }
+	    },
+
+	    _fireChangeEvent: function (event) {
+	      if (this.props[event]) {
+	        this.props[event](undoEnsureArray(this.state.value));
+	      }
+	    },
+
+	    render: function () {
+	      var state = this.state;
+	      var props = this.props;
+
+	      var offset = this.tempArray;
+	      var value = state.value;
+	      var l = value.length;
+	      for (var i = 0; i < l; i++) {
+	        offset[i] = this._calcOffset(value[i], i);
+	      }
+
+	      var bars = props.withBars ? this._renderBars(offset) : null;
+	      var handles = this._renderHandles(offset);
+
+	      return (
+	        React.createElement('div', {
+	            ref: 'slider',
+	            style: {position: 'relative'},
+	            className: props.className + (props.disabled ? ' disabled' : ''),
+	            onMouseDown: this._onSliderMouseDown,
+	            onClick: this._onSliderClick
+	          },
+	          bars,
+	          handles
+	        )
+	      );
+	    }
+	  });
+
+	  return ReactSlider;
+	}));
+
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(171);
+
+	var _ui = __webpack_require__(213);
+
+	var _audios = __webpack_require__(215);
+
+	var _reactSlider = __webpack_require__(210);
+
+	var _reactSlider2 = _interopRequireDefault(_reactSlider);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Tools = function (_React$Component) {
+	  _inherits(Tools, _React$Component);
+
+	  function Tools(props) {
+	    _classCallCheck(this, Tools);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).call(this, props));
+
+	    _this.displayName = 'Tools';
+	    _this.state = {
+	      velocityInterval: null,
+	      velocity: 0,
+	      prevValue: 0,
+	      curValue: 1000,
+	      listId: -1,
+	      maxValue: 1000
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Tools, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(newProps) {
+	      if (newProps && newProps.dateList) {
+	        var breakpoints = newProps.dateList.length;
+	        var sliderMaxValue = breakpoints * 100 - 1;
+	        this.setState({ maxValue: sliderMaxValue, curValue: sliderMaxValue, itemRange: 100 });
+	      }
+	    }
+	  }, {
+	    key: 'sliderBeforeChange',
+	    value: function sliderBeforeChange() {
+	      var _this2 = this;
+
+	      var dispatch = this.props.dispatch;
+
+	      dispatch((0, _ui.dateSliderDragStart)());
+
+	      this.setState({
+	        prevValue: this.refs.dateSlider.getValue(),
+	        velocityInterval: setInterval(function () {
+	          var _state = _this2.state;
+	          var prevValue = _state.prevValue;
+	          var curValue = _state.curValue;
+
+	          var velocity = Math.abs(prevValue - curValue) / 100;
+
+	          if (curValue < prevValue) {
+	            velocity = -velocity;
+	          }
+
+	          _this2.setState({ velocity: velocity });
+	        }, 100)
+	      });
+	    }
+	  }, {
+	    key: 'sliderChange',
+	    value: function sliderChange() {
+	      var dispatch = this.props.dispatch;
+
+	      var value = this.refs.dateSlider.getValue();
+	      var itemRange = this.state.itemRange;
+
+
+	      var listId = Math.floor(value / itemRange);
+
+	      this.setState({ prevValue: this.state.curValue, curValue: this.refs.dateSlider.getValue(), listId: listId });
+	      dispatch((0, _ui.dateSliderChange)(this.state.velocity));
+	    }
+	  }, {
+	    key: 'sliderAfterChange',
+	    value: function sliderAfterChange() {
+	      var _props = this.props;
+	      var dispatch = _props.dispatch;
+	      var dateList = _props.dateList;
+
+
+	      dispatch((0, _ui.dateSliderDragStop)());
+	      dispatch((0, _audios.setDateFilter)(dateList[this.state.listId]));
+
+	      this.setState({ velocity: 0 });
+	      clearInterval(this.state.velocityInterval);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var dateList = this.props.dateList;
+	      var listId = this.state.listId;
+
+
+	      var ready = false;
+	      var curDate = null;
+	      if (dateList && listId >= 0) {
+	        curDate = dateList[listId];
+	        ready = true;
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tools' },
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'date' },
+	          ready ? curDate.month + ' ' + curDate.year : ''
+	        ),
+	        _react2.default.createElement(
+	          _reactSlider2.default,
+	          {
+	            ref: 'dateSlider',
+	            value: this.state.curValue,
+	            max: this.state.maxValue,
+	            withBars: true,
+	            barClassName: 'slider-body',
+	            onBeforeChange: this.sliderBeforeChange.bind(this),
+	            onChange: this.sliderChange.bind(this),
+	            onAfterChange: this.sliderAfterChange.bind(this) },
+	          _react2.default.createElement('div', { className: 'slider-handle' })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Tools;
+	}(_react2.default.Component);
+
+	function mapStateToProps(state) {
+	  return { minDate: state.audios.minDate,
+	    maxDate: state.audios.maxDate,
+	    dateList: state.audios.dateList
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Tools);
+
+/***/ },
+/* 212 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var initialState = {
+	  dateSlider: {
+	    isDragging: false,
+	    position: null,
+	    velocity: null
+	  }
+	};
+
+	function dateSlider() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState.dateSlider : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'DATE_SLIDER_DRAG_START':
+	      return _extends({}, state, {
+	        dateSliderIsDragging: true
+	      });
+	    case 'DATE_SLIDER_DRAG_CHANGE':
+	      return _extends({}, state, {
+	        velocity: action.velocity
+	      });
+	    case 'DATE_SLIDER_DRAG_STOP':
+	      return _extends({}, state, {
+	        dateSliderIsDragging: false
+	      });
+	  }
+	}
+
+	function ui() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'DATE_SLIDER_DRAG_START':
+	    case 'DATE_SLIDER_DRAG_STOP':
+	    case 'DATE_SLIDER_CHANGE':
+	      return _extends({}, state, {
+	        dateSlider: dateSlider(state.dateSlider, action)
+	      });
+	  }
+	}
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.dateSliderChange = dateSliderChange;
+	exports.dateSliderDragStart = dateSliderDragStart;
+	exports.dateSliderDragStop = dateSliderDragStop;
+	function dateSliderChange(velocity) {
+	  return {
+	    type: 'DATE_SLIDER_CHANGE',
+	    velocity: velocity
+	  };
+	}
+
+	function dateSliderDragStart() {
+	  return {
+	    type: 'DATE_SLIDER_DRAG_START'
+	  };
+	}
+
+	function dateSliderDragStop(value) {
+	  return {
+	    type: 'DATE_SLIDER_DRAG_STOP',
+	    value: value
+	  };
+	}
+
+/***/ },
+/* 214 */,
+/* 215 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.setDateFilter = setDateFilter;
+	function setDateFilter(date) {
+	  return {
+	    type: 'PLAYLIST_SET_FILTER',
+	    date: date
+	  };
+	}
 
 /***/ }
 /******/ ]);

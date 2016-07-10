@@ -42,7 +42,7 @@
         visibility: hidden;
       }
 
-      &.active {
+      &.active.is-playing {
         .playing-icon {
           visibility: visible;
         }

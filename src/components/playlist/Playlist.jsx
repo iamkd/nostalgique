@@ -21,21 +21,31 @@ class Playlist extends React.Component {
     }
 
     render() {
-        const {isFetching, audios, currentTrack} = this.props;
+        const {isFetching, audios, currentTrack, isPlaying, dateFilter} = this.props;
+
+        let tracks = audios
+          .filter(track => {
+            if (dateFilter) {
+              return track.dateStamp.year == dateFilter.year && track.dateStamp.month == dateFilter.month;
+            }
+            return true;
+          })
+          .map(track => {
+              return <Track key={track.id} clickedHandler={this.trackClicked.bind(this, track)} current={(track == currentTrack)} isPlaying={isPlaying} {...track}  />
+          });
+
         if (isFetching) {
           return <Loader />
         } else {
           return <div className="playlist">
-            {audios.map((track) => {
-              return <Track key={track.id} clickedHandler={this.trackClicked.bind(this, track)} current={(track == currentTrack)} {...track}  />
-            })}
+            {tracks}
           </div>;
         }
     }
 }
 
 function mapStateToProps(state) {
-  return {isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: (state.player.currentTrackId == -1) ? null : state.audios.items[state.player.currentTrackId]};
+  return {isFetching: state.audios.isFetching, audios: state.audios.items, currentTrack: (state.player.currentTrackId == -1) ? null : state.audios.items[state.player.currentTrackId], isPlaying: state.player.isPlaying, dateFilter: state.audios.dateFilter};
 }
 
 export default connect(mapStateToProps)(Playlist);

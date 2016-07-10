@@ -6,15 +6,24 @@ class Track extends React.Component {
         this.displayName = 'Track';
     }
     render() {
-        const {id, artist, title, dateStamp, current, clickedHandler } = this.props;
+        const {id, artist, title, dateStamp, current, clickedHandler, isPlaying } = this.props;
         
-        let name = artist + " - " + title;
+        //very long dash
+        let name = `${artist} ${String.fromCharCode(8212)} ${title}`;
 
         if (name.length > 60) {
           name = name.substring(0, 60) + '...';
         }
 
-        return <div onClick={clickedHandler} className={"track" + (current ? ' active' : '')}>
+        let trackClass = 'track';
+        if (current) {
+          trackClass += ' active';
+        }
+        if (isPlaying) {
+          trackClass += ' is-playing';
+        }
+
+        return <div onClick={clickedHandler} className={trackClass}>
                   <p className="track-row">
                     <i className="playing-icon fa fa-music"></i>
                     {name} 
