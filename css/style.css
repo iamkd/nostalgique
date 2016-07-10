@@ -863,9 +863,8 @@ body {
         top: 10.5px;
         height: 7px;
         border-radius: 100px;
-        width: 100%;
         border: 1px solid #ccc; }
-      .tools-container .tools .slider .slider-body-filled, .tools-container .tools .player-slider .slider-body-filled {
+      .tools-container .tools .slider .slider-body-0, .tools-container .tools .player-slider .slider-body-0, .tools-container .tools .slider .slider-body-filled, .tools-container .tools .player-slider .slider-body-filled {
         position: absolute;
         top: 10.5px;
         height: 7px;
@@ -875,9 +874,6 @@ body {
         border: 1px solid #ccc;
         background: #e6e6e6; }
       .tools-container .tools .slider .slider-handle, .tools-container .tools .player-slider .slider-handle {
-        position: absolute;
-        top: 0;
-        right: 50px;
         width: 28px;
         height: 28px;
         border-radius: 100px;
@@ -913,7 +909,7 @@ body {
       .playlist-container .playlist .track .playing-icon {
         width: 18px;
         visibility: hidden; }
-      .playlist-container .playlist .track.active .playing-icon {
+      .playlist-container .playlist .track.active.is-playing .playing-icon {
         visibility: visible; }
       .playlist-container .playlist .track .track-info {
         color: #b3b3b3;
@@ -941,12 +937,16 @@ body {
         display: block;
         margin-right: 2.35765%;
         width: 31.76157%;
-        font-size: 2.1em;
-        text-align: center; }
+        font-size: 1.9em;
+        text-align: center;
+        cursor: pointer;
+        color: #525252; }
         .player-container .player .player-buttons .player-button:last-child {
           margin-right: 0; }
         .player-container .player .player-buttons .player-button.inactive {
-          color: #999999; }
+          color: #cccccc; }
+        .player-container .player .player-buttons .player-button:hover:not(.inactive) {
+          color: #333; }
         .player-container .player .player-buttons .player-button .fa-play {
           padding-left: 3px; }
     .player-container .player .player-seeker {
@@ -960,7 +960,8 @@ body {
       float: left;
       display: block;
       margin-right: 2.35765%;
-      width: 14.70196%; }
+      width: 14.70196%;
+      height: 24px; }
       .player-container .player .player-volume:last-child {
         margin-right: 0; }
 
@@ -1037,7 +1038,10 @@ div.page {
 header.app-header {
   width: 100%;
   height: 50px;
-  text-align: center; }
+  text-align: center;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto; }
   header.app-header .logo, header.app-header .made-by {
     line-height: 50px;
     margin-top: 0;
