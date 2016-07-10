@@ -23016,13 +23016,31 @@
 	      var isPlaying = _props2.isPlaying;
 	      var dateFilter = _props2.dateFilter;
 
-
-	      var tracks = audios.filter(function (track) {
-	        if (dateFilter) {
-	          return track.dateStamp.year == dateFilter.year && track.dateStamp.month == dateFilter.month;
+	      var tracks = null;
+	      if (dateFilter && dateFilter.season == 'winter') {
+	        if (dateFilter.monthNumber == 11) {
+	          tracks = audios.filter(function (track) {
+	            return (track.dateStamp.monthNumber == 0 || track.dateStamp.monthNumber == 1) && track.dateStamp.year == dateFilter.year + 1;
+	          }).concat(audios.filter(function (track) {
+	            return track.dateStamp.monthNumber == 11 && track.dateStamp.year == dateFilter.year;
+	          }));
+	        } else {
+	          tracks = audios.filter(function (track) {
+	            return (track.dateStamp.monthNumber == 0 || track.dateStamp.monthNumber == 1) && track.dateStamp.year == dateFilter.year;
+	          }).concat(audios.filter(function (track) {
+	            return track.dateStamp.monthNumber == 11 && track.dateStamp.year == dateFilter.year - 1;
+	          }));
 	        }
-	        return true;
-	      }).map(function (track) {
+	      } else {
+	        tracks = audios.filter(function (track) {
+	          if (dateFilter) {
+	            return track.dateStamp.season == dateFilter.season && track.dateStamp.year == dateFilter.year;
+	          }
+	          return true;
+	        });
+	      }
+
+	      tracks = tracks.map(function (track) {
 	        return _react2.default.createElement(_Track2.default, _extends({ key: track.id, clickedHandler: _this2.trackClicked.bind(_this2, track), current: track == currentTrack, isPlaying: isPlaying }, track));
 	      });
 
@@ -23890,6 +23908,7 @@
 
 	  parsed.minDate = minDate;
 	  parsed.maxDate = maxDate;
+	  parsed.dateFilter = maxDate;
 	  parsed.dateList = dateList.sort(function (a, b) {
 	    var av = parseFloat(a.year + '.' + (a.monthNumber < 10 ? '0' + String(a.monthNumber) : a.monthNumber));
 	    var bv = parseFloat(b.year + '.' + (b.monthNumber < 10 ? '0' + String(b.monthNumber) : b.monthNumber));
@@ -23909,8 +23928,16 @@
 	  return parsed;
 	}
 
+	var initialState = {
+	  isFetching: false,
+	  items: [],
+	  minDate: null,
+	  maxDate: null,
+	  dateList: []
+	};
+
 	function audios() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? { isFetching: false, items: [], minDate: null, maxDate: null, dateList: [], dateFilter: null } : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
@@ -24858,6 +24885,10 @@
 
 	var _audios = __webpack_require__(215);
 
+	var _Loader = __webpack_require__(198);
+
+	var _Loader2 = _interopRequireDefault(_Loader);
+
 	var _reactSlider = __webpack_require__(210);
 
 	var _reactSlider2 = _interopRequireDefault(_reactSlider);
@@ -24893,10 +24924,10 @@
 	  _createClass(Tools, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(newProps) {
-	      if (newProps && newProps.dateList) {
+	      if (newProps && newProps.dateList && newProps.dateList != this.props.dateList) {
 	        var breakpoints = newProps.dateList.length;
-	        var sliderMaxValue = breakpoints * 100 - 1;
-	        this.setState({ maxValue: sliderMaxValue, curValue: sliderMaxValue, itemRange: 100 });
+	        var sliderMaxValue = breakpoints * 1000 - 1;
+	        this.setState({ maxValue: sliderMaxValue, curValue: sliderMaxValue, itemRange: 1000 });
 	      }
 	    }
 	  }, {
@@ -24928,7 +24959,9 @@
 	  }, {
 	    key: 'sliderChange',
 	    value: function sliderChange() {
-	      var dispatch = this.props.dispatch;
+	      var _props = this.props;
+	      var dispatch = _props.dispatch;
+	      var dateList = _props.dateList;
 
 	      var value = this.refs.dateSlider.getValue();
 	      var itemRange = this.state.itemRange;
@@ -24938,13 +24971,14 @@
 
 	      this.setState({ prevValue: this.state.curValue, curValue: this.refs.dateSlider.getValue(), listId: listId });
 	      dispatch((0, _ui.dateSliderChange)(this.state.velocity));
+	      dispatch((0, _audios.setDateFilter)(dateList[this.state.listId]));
 	    }
 	  }, {
 	    key: 'sliderAfterChange',
 	    value: function sliderAfterChange() {
-	      var _props = this.props;
-	      var dispatch = _props.dispatch;
-	      var dateList = _props.dateList;
+	      var _props2 = this.props;
+	      var dispatch = _props2.dispatch;
+	      var dateList = _props2.dateList;
 
 
 	      dispatch((0, _ui.dateSliderDragStop)());
@@ -24956,15 +24990,19 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var dateList = this.props.dateList;
-	      var listId = this.state.listId;
+	      var dateFilter = this.props.dateFilter;
 
 
-	      var ready = false;
-	      var curDate = null;
-	      if (dateList && listId >= 0) {
-	        curDate = dateList[listId];
-	        ready = true;
+	      var dateString = '';
+	      if (dateFilter) {
+	        dateString = dateFilter.season + ' ' + dateFilter.year;
+	        if (dateFilter.season == 'winter') {
+	          if (dateFilter.monthNumber == 11) {
+	            dateString = dateFilter.season + ' ' + dateFilter.year + '-' + (dateFilter.year + 1);
+	          } else {
+	            dateString = dateFilter.season + ' ' + (dateFilter.year - 1) + '-' + dateFilter.year;
+	          }
+	        }
 	      }
 
 	      return _react2.default.createElement(
@@ -24973,7 +25011,7 @@
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'date' },
-	          ready ? curDate.month + ' ' + curDate.year : ''
+	          dateFilter ? dateString : _react2.default.createElement(_Loader2.default, null)
 	        ),
 	        _react2.default.createElement(
 	          _reactSlider2.default,
@@ -24996,9 +25034,16 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(state) {
-	  return { minDate: state.audios.minDate,
-	    maxDate: state.audios.maxDate,
-	    dateList: state.audios.dateList
+	  var _state$audios = state.audios;
+	  var minDate = _state$audios.minDate;
+	  var maxDate = _state$audios.maxDate;
+	  var dateList = _state$audios.dateList;
+	  var dateFilter = _state$audios.dateFilter;
+
+	  return { minDate: minDate,
+	    maxDate: maxDate,
+	    dateList: dateList,
+	    dateFilter: dateFilter
 	  };
 	}
 
