@@ -1,0 +1,93 @@
+$base-height: 28px;
+.slider {
+  width: 100%;
+  height: $base-height;
+  position: relative;
+  margin: 0 auto;
+  .slider-body {
+    position: relative;
+    top: $base-height * 3 / 8;
+    height: $base-height / 4;
+    border-radius: 100px;
+    border: 1px solid $base-gray;
+  }
+
+  .slider-body-0, .slider-body-filled {
+    position: absolute;
+    top: $base-height * 3 / 8;
+    height: $base-height / 4;
+    border-radius: 100px;
+    left: 0;
+    right: 50px;
+    border: 1px solid $base-gray;
+    background: lighten($base-gray, 5%);
+  }
+
+  .slider-handle {
+    width: $base-height;
+    height: $base-height;
+    border-radius: 100px;
+    border: 1px solid shade($base-gray, 5%);
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.08);
+    background: white;
+    cursor: pointer;
+  }
+}
+
+.volume-slider {
+  $vol-height: 18px;
+  @extend .slider;
+  height: $vol-height;
+  .slider-body, .slider-body-0, .slider-body-filled {
+    top: $vol-height * 3 / 8;
+    height: $vol-height / 4;
+  }
+  .slider-handle {
+    width: $vol-height;
+    height: $vol-height;
+  }
+}
+
+.seeker-slider {
+  $vol-height: 18px;
+  @extend .slider;
+  height: $vol-height;
+  .slider-body, .slider-body-0, .slider-body-filled {
+    top: $vol-height * 3 / 8;
+    height: $vol-height / 4;
+    cursor: pointer;
+
+    &.preload {
+      position: absolute;
+      top: 7px;
+      left: 0;
+      right: 60px;
+      border: none;
+      background: lighten($base-gray, 7%);
+      z-index: -1;
+    }
+  }
+  .slider-body-0 {
+    border-radius: 100px 0 0 100px;
+    border-right: none;
+  }
+  .slider-body-1 {
+    border-radius: 0 100px 100px 0;
+    border-left: none;
+  }
+
+  .seeker-handle {
+    display: none;
+    cursor: pointer;
+    width: 10px;
+    height: 7px;
+    margin-left: 3px;
+    margin-top: 3px;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color .1s ease-out;
+  }
+
+  .seeker-handle:hover {
+    background-color: $base-gray;
+  }
+}

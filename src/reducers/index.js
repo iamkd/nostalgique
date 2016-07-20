@@ -10,7 +10,7 @@ const appReducers = combineReducers({
   auth,
   user,
   player,
-  ui
+  ui,
 });
 
 export default appReducers;

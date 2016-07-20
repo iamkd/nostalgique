@@ -1,45 +1,50 @@
 export function playerLoadTrack(trackId) {
   return {
     type: 'PLAYER_LOAD_TRACK',
-    trackId: trackId
-  }
+    trackId,
+  };
 }
 
 function playerPlay() {
   return {
-    type: 'PLAYER_PLAY'
-  }
+    type: 'PLAYER_PLAY',
+  };
 }
 
 function playerPause() {
   return {
-    type: 'PLAYER_PAUSE'
-  }
+    type: 'PLAYER_PAUSE',
+  };
 }
 
 function playerStop() {
   return {
-    type: 'PLAYER_STOP'
-  }
+    type: 'PLAYER_STOP',
+  };
 }
 
 export function playerNextTrack() {
   return {
-    type: 'PLAYER_NEXT_TRACK'
-  }
+    type: 'PLAYER_NEXT_TRACK',
+  };
 }
 
 export function playerPrevTrack() {
   return {
-    type: 'PLAYER_PREV_TRACK'
-  }
+    type: 'PLAYER_PREV_TRACK',
+  };
 }
 
-function playerSeeking(value) {
+export function playerStartSeeking() {
   return {
-    type: 'PLAYER_SEEKING',
-    value: value
-  }
+    type: 'PLAYER_START_SEEKING',
+  };
+}
+
+export function playerStopSeeking() {
+  return {
+    type: 'PLAYER_STOP_SEEKING',
+  };
 }
 
 export function playerSetPlayState(state) {
@@ -51,5 +56,12 @@ export function playerSetPlayState(state) {
       default:
         dispatch(playerStop()); break;
     }
-  }
+  };
+}
+
+export function playerSetVolume(volume) {
+  return {
+    type: 'PLAYER_SET_VOLUME',
+    volume,
+  };
 }

@@ -1,19 +1,19 @@
 export function dateSliderChange(velocity) {
   return {
     type: 'DATE_SLIDER_CHANGE',
-    velocity: velocity
-  }
+    velocity,
+  };
 }
 
 export function dateSliderDragStart() {
   return {
-    type: 'DATE_SLIDER_DRAG_START'
-  }
+    type: 'DATE_SLIDER_DRAG_START',
+  };
 }
 
 export function dateSliderDragStop(value) {
   return {
     type: 'DATE_SLIDER_DRAG_STOP',
-    value: value
-  }
+    value,
+  };
 }

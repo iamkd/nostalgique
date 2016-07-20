@@ -1,35 +1,40 @@
 const initialState = {
   dateSlider: {
-    isDragging: false, 
-    position: null, 
-    velocity: null
-  }
+    isDragging: false,
+    position: null,
+    velocity: 0,
+  },
 };
 
 function dateSlider(state = initialState.dateSlider, action) {
   switch (action.type) {
     case 'DATE_SLIDER_DRAG_START':
       return Object.assign({}, state, {
-        dateSliderIsDragging: true
+        isDragging: true,
       });
-    case 'DATE_SLIDER_DRAG_CHANGE':
+    case 'DATE_SLIDER_CHANGE':
       return Object.assign({}, state, {
-        velocity: action.velocity
+        velocity: action.velocity,
       });
     case 'DATE_SLIDER_DRAG_STOP':
       return Object.assign({}, state, {
-        dateSliderIsDragging: false
+        isDragging: false,
+        velocity: 0,
       });
+    default:
+      return state;
   }
 }
 
-function ui(state = initialState, action) {
+export default function ui(state = initialState, action) {
   switch (action.type) {
     case 'DATE_SLIDER_DRAG_START':
     case 'DATE_SLIDER_DRAG_STOP':
     case 'DATE_SLIDER_CHANGE':
       return Object.assign({}, state, {
-        dateSlider: dateSlider(state.dateSlider, action)
+        dateSlider: dateSlider(state.dateSlider, action),
       });
+    default:
+      return state;
   }
 }

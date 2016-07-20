@@ -6,6 +6,7 @@
 
   .player {
     height: 75px;
+    padding: 0 20px;
     
     @extend .white-block;
 
@@ -13,8 +14,7 @@
     align-items: center;
 
     .player-buttons {
-      @include span-columns(3);
-      padding: 0 20px;
+      @include span-columns(2);
       .player-button {
         @include span-columns(4);
         font-size: 1.9em;
@@ -37,12 +37,12 @@
     }
 
     .player-seeker {
-      @include span-columns(7);
+      @include span-columns(8);
     }
 
     .player-volume {
       @include span-columns(2);
-      height: 24px;
+      height: 18px;
     }
   }
 }

@@ -19,7 +19,10 @@
       padding: 5px 10px;
       margin: 5px 0;
 
-      -webkit-user-select: none;
+      text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
       user-select: none;
 
       cursor: pointer;
@@ -53,6 +56,14 @@
         float: right;
         padding-right: 18px;
       }
+
+      // .track-name {
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        // overflow: hidden;
+      //   display:inline-block;
+      //    @include span-columns(9);
+      // }
     }
   }
 }

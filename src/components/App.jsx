@@ -9,25 +9,29 @@ import { authCheckIfNeeded } from '../actions';
 require('../styles/app.scss');
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'App';
-    }
+  constructor(props) {
+    super(props);
+    this.displayName = 'App';
+  }
 
-    componentDidMount() {
-      const { dispatch } = this.props;
-      dispatch(authCheckIfNeeded());
-    }
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(authCheckIfNeeded());
+  }
 
-    render() {
-      const { authorized } = this.props;
-      if (authorized) {
-        return <Main />
-      } else {
-        return <Auth />
-      }
+  render() {
+    const { authorized } = this.props;
+    if (authorized) {
+      return <Main />;
     }
+    return <Auth />;
+  }
 }
+
+App.propTypes = {
+  authorized: React.PropTypes.bool,
+  dispatch: React.PropTypes.func,
+};
 
 function mapStateToProps(state) {
   return { authorized: state.auth.authorized };

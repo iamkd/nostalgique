@@ -1,0 +1,46 @@
+.loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader-clock {
+    margin: 20px;
+    user-select: none;
+    border-radius: 1000px;
+    border: 5px solid $base-black;
+    height: 125px;
+    width: 125px;
+    position: relative;
+    background: white;
+    .minutes-container, .hours-container, .seconds-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .hours {
+        background: $base-black;
+        height: 30%;
+        left: 48.75%;
+        position: absolute;
+        top: 20%;
+        transform-origin: 50% calc(100% - 2px);
+        width: 5%;
+        border-radius: 5px;
+    }
+
+    .minutes {
+        background: $base-black;
+        height: 40%;
+        left: 48.75%;
+        position: absolute;
+        top: 10%;
+        transform-origin: 50% calc(100% - 2px);
+        width: 5%;
+        border-radius: 5px;
+    }
+}
