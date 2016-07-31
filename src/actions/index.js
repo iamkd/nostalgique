@@ -54,9 +54,15 @@ function requestAuth() {
 }
 
 function receiveAuth(session) {
+  if (session == null) {
+    return {
+      type: 'RECEIVE_AUTH',
+      authorized: false,
+    };
+  }
   return {
     type: 'RECEIVE_AUTH',
-    authorized: session != null,
+    authorized: session.session != null,
   };
 }
 
