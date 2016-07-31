@@ -54,7 +54,8 @@ function requestAuth() {
 }
 
 function receiveAuth(session) {
-  if (session == null) {
+  if (session == null ||
+     (session.session == null && session.status === 'unknown')) {
     return {
       type: 'RECEIVE_AUTH',
       authorized: false,
@@ -62,7 +63,7 @@ function receiveAuth(session) {
   }
   return {
     type: 'RECEIVE_AUTH',
-    authorized: session.session != null,
+    authorized: true,
   };
 }
 
