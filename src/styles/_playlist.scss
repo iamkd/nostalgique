@@ -18,9 +18,12 @@
       line-height: 26px;
       padding: 7px 10px;
 
+      display: flex;
+      justify-content: space-between;
+
       text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+      white-space: nowrap;
+      overflow: hidden;
 
       user-select: none;
 
@@ -41,6 +44,7 @@
 
       .playing-icon {
         width: 18px;
+        line-height: 26px;
         visibility: hidden;
       }
 
@@ -52,14 +56,18 @@
 
       .track-name {
         display: inline-block;
+        width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding-right: 10px;
+        padding-left: 5px;
       }
 
       .track-info {
         color: lighten($base-black, 50%);
         float: right;
         padding-right: 18px;
+        align-self: flex-end;
       }
 
       // .track-name {

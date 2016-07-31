@@ -29,7 +29,7 @@ class Track extends React.Component {
       <p className="track-name">
         <b>{artist}</b><span>&nbsp;{String.fromCharCode(8212)}&nbsp;</span><span>{title}</span>
       </p>
-      <span className="track-info">{`${dateStamp.month} ${dateStamp.year}`}</span>
+      <p className="track-info">{`${dateStamp.month} ${dateStamp.year}`}</p>
     </div>);
   }
 }

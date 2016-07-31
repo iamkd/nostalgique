@@ -24,14 +24,14 @@ class Auth extends React.Component {
     return (<div className="page auth-page page-flex">
       <div className="auth-panel">
         <h1 className="logo">nostalgique</h1>
-        <h4 className="auth-text">Взгляните сквозь время с помощью вашего плейлиста.</h4>
+        <h4 className="auth-text">Look through time using your playlist.</h4>
         <button
           type="button"
           onClick={this.auth}
           disabled={isFetching}
           className={`btn btn-default auth-button ${(isFetching ? ' disabled' : '')}`}
         >
-          {isFetching ? 'Авторизация...' : 'Войти с помощью VK'}
+          {isFetching ? 'Authorizing...' : 'Login using VK'}
         </button>
       </div>
     </div>);
