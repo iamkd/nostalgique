@@ -14,10 +14,9 @@
 
     .track {
       width: 100%;
-      height: 38px;
-      line-height: 28px;
-      padding: 5px 10px;
-      margin: 5px 0;
+      height: 40px;
+      line-height: 26px;
+      padding: 7px 10px;
 
       text-overflow: ellipsis;
         white-space: nowrap;
@@ -49,6 +48,12 @@
         .playing-icon {
           visibility: visible;
         }
+      }
+
+      .track-name {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .track-info {

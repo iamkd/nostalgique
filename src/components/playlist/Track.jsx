@@ -25,11 +25,11 @@ class Track extends React.Component {
     }
 
     return (<div onClick={this.clicked} className={trackClass}>
-      <p className="track-row" style={{ textOverflow: 'ellipsis' }}>
-        <i className="playing-icon fa fa-music"></i>
+      <i className="playing-icon fa fa-music"></i>
+      <p className="track-name">
         <b>{artist}</b><span>&nbsp;{String.fromCharCode(8212)}&nbsp;</span><span>{title}</span>
-        <span className="track-info">{`${dateStamp.month} ${dateStamp.year}`}</span>
       </p>
+      <span className="track-info">{`${dateStamp.month} ${dateStamp.year}`}</span>
     </div>);
   }
 }

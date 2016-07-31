@@ -25,8 +25,11 @@ class Playlist extends React.Component {
   render() {
     const { isFetching, sliderIsDragging, audios, currentTrackId, isPlaying } = this.props;
 
-    let toRender = audios;
-    toRender = toRender.map(track =>
+    if (isFetching || sliderIsDragging) {
+      return <Loader />;
+    }
+
+    const toRender = audios.map(track =>
       <Track
         key={track.id}
         clickedHandler={this.trackClicked}
@@ -35,10 +38,6 @@ class Playlist extends React.Component {
         track={track}
       />
     );
-
-    if (isFetching || sliderIsDragging) {
-      return <Loader />;
-    }
 
     return (<div className="playlist">
       {toRender}
